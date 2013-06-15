@@ -12,21 +12,21 @@
     (reduce + divs)))
 
 ;; Utility function -- likely to be useful throughout.
-(with-test
+(with-test ; clwk
   (defn- divisible-by? [r n]
     (zero? (mod n r)))
   (is (divisible-by? 5 10))
   (is (not (divisible-by? 6 10))))
 
 ;; Syntactic sugar.  Useful to have both for partial application.
-(with-test
+(with-test ; clwk
   (defn- divides? [n r]
     (divisible-by? r n))
   (is (divides? 100 20))
   (is (not (divides? 17 3))))
 
 ;; Generalized solution to the sum of range divisors problem.
-(with-test
+(with-test ; clwk
   (defn range-divisors-sum 
     ([end divisor] (divisors-sum 0 end divisor))
     ([start end divisors]  
@@ -36,11 +36,11 @@
   (is (= (range-divisors-sum 10 20 [2 3])) 85))
 
 ;; Hard-coded divisors to make the general solution concrete.
-(with-test
+(with-test ; clwk
   (defn euler-1 [n] (range-divisors-sum n [3 5]))
   (is (= (euler-1 10) 23)))
 
 ;; Proof that this returns the same result as your (CSL) original.
-(deftest test-euler-1 []
+(deftest test-euler-1 [] ; clwk
   (is (= (euler-1 1000) (euler1 0 1000))))
 
