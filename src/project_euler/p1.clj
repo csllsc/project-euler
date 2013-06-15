@@ -16,7 +16,8 @@
   (defn- divisible-by? [r n]
     (zero? (mod n r)))
   (is (divisible-by? 5 10))
-  (is (not (divisible-by? 6 10))))
+  (is (not (divisible-by? 6 10)))) 
+
 
 ;; Syntactic sugar.  Useful to have both for partial application.
 (with-test
@@ -28,7 +29,7 @@
 ;; Generalized solution to the sum of range divisors problem.
 (with-test
   (defn range-divisors-sum 
-    ([end divisor] (divisors-sum 0 end divisor))
+    ([end divisor] (range-divisors-sum 0 end divisor))   ;;added range                          
     ([start end divisors]  
        (reduce + (filter #(some (partial divides? %) divisors) 
                          (range start end)))))
