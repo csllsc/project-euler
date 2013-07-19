@@ -26,8 +26,8 @@
 (defn euler-2 []
   (reduce + (filter even? (seq-max (fib 0 1) 4000000))))
 
-project-euler.core> (euler-2)
-4613732
+;;project-euler.core> (euler-2)
+;;4613732
 
 
 ;; PROBLEM #1 - Multiples of 3 and 5
