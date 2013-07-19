@@ -10,6 +10,8 @@
   (println "Hello, World!"))
 
 
+
+
 ;;PROBLEM #2 - Even Fibonacci numbers
 
 ;; CSL original
@@ -24,9 +26,11 @@
 (defn euler-2 []
   (reduce + (filter even? (seq-max (fib 0 1) 4000000))))
 
+project-euler.core> (euler-2)
+4613732
 
 
-
+;; PROBLEM #1 - Multiples of 3 and 5
 
 ;; CSL original.
 (defn euler1
