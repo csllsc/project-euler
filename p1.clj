@@ -44,3 +44,16 @@
 (deftest test-euler-1 [] ; clwk
   (is (= (euler-1 1000) (euler1 0 1000))))
 
+
+(with-test
+  (defn- fib
+    ([] (fib 1 2))
+    ([n m] (cons n (lazy-seq (fib m (+ m n))))))
+  (is (= (take 10 (fib)) [1 2 3 5 8 13 21 34 55 89])))
+
+(defn euler-2 
+  ([] (euler-2 4000000))
+  ([n] (reduce + (take-while #(<= % n) (filter even? (fib))))))
+
+
+
