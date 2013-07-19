@@ -28,12 +28,6 @@
 
 
 
-
-
-
-
-
-
 ;; CSL original.
 (defn euler1
   [s f]
