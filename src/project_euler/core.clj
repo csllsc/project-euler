@@ -2,32 +2,7 @@
   (:use [clojure.test :as t :only [deftest with-test testing is run-tests run-all-tests]])
   (:gen-class))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  ;; work around dangerous default behaviour in Clojure
-  (alter-var-root #'*read-eval* (constantly false))
-  (println "Hello, World!"))
 
-
-
-
-;;PROBLEM #2 - Even Fibonacci numbers
-
-;; CSL original
-
-(defn fib [t0 t1]
-  (cons t0 (lazy-seq (fib t1 (+ t0 t1)))))
-
-(defn seq-max [seq max]
-  (take-while (fn [x] (< x max)) seq))
-
-
-(defn euler-2 []
-  (reduce + (filter even? (seq-max (fib 0 1) 4000000))))
-
-;;project-euler.core> (euler-2)
-;;4613732
 
 
 ;; PROBLEM #1 - Multiples of 3 and 5
@@ -76,4 +51,21 @@
 (deftest test-euler-1 []
   (is (= (euler-1 1000) (euler1 0 1000))))
 
+
+;;PROBLEM #2 - Even Fibonacci numbers
+
+;; CSL original
+
+(defn fib [t0 t1]
+  (cons t0 (lazy-seq (fib t1 (+ t0 t1)))))
+
+(defn seq-max [seq max]
+  (take-while (fn [x] (< x max)) seq))
+
+
+(defn euler-2 []
+  (reduce + (filter even? (seq-max (fib 0 1) 4000000))))
+
+;;project-euler.core> (euler-2)
+;;4613732
 
