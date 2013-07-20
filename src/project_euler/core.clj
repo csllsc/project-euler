@@ -9,27 +9,6 @@
   (alter-var-root #'*read-eval* (constantly false))
   (println "Hello, World!"))
 
-
-
-
-;;PROBLEM #2 - Even Fibonacci numbers
-
-;; CSL original
-
-(defn fib [t0 t1]
-  (cons t0 (lazy-seq (fib t1 (+ t0 t1)))))
-
-(defn seq-max [seq max]
-  (take-while (fn [x] (< x max)) seq))
-
-
-(defn euler-2 []
-  (reduce + (filter even? (seq-max (fib 0 1) 4000000))))
-
-;;project-euler.core> (euler-2)
-;;4613732
-
-
 ;; PROBLEM #1 - Multiples of 3 and 5
 
 ;; CSL original.
@@ -76,4 +55,31 @@
 (deftest test-euler-1 []
   (is (= (euler-1 1000) (euler1 0 1000))))
 
+;;PROBLEM #2 - Even Fibonacci numbers
 
+;; CSL original
+
+(defn fib [t0 t1]
+  (cons t0 (lazy-seq (fib t1 (+ t0 t1)))))
+
+(defn seq-max [seq max]
+  (take-while (fn [x] (< x max)) seq))
+
+
+(defn euler-2 []
+  (reduce + (filter even? (seq-max (fib 0 1) 4000000))))
+
+;;project-euler.core> (euler-2)
+;;4613732
+
+
+;; clwk version:
+(with-test
+  (defn- fib
+    ([] (fib 1 2))
+    ([n m] (cons n (lazy-seq (fib m (+ m n))))))
+  (is (= (take 10 (fib)) [1 2 3 5 8 13 21 34 55 89])))
+
+(defn euler-2 
+  ([] (euler-2 4000000))
+  ([n] (reduce + (take-while #(<= % n) (filter even? (fib))))))
