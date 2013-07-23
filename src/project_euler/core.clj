@@ -83,3 +83,9 @@
 (defn euler-2 
   ([] (euler-2 4000000))
   ([n] (reduce + (take-while #(<= % n) (filter even? (fib))))))
+
+
+;;PROBLEM #3 - Largest Prime Factor
+;; csl version
+
+
