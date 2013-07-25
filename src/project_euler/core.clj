@@ -89,3 +89,17 @@
 ;; csl version
 
 
+(defn max-prime-factor [n]
+  "return largest prime factor"
+  (let [num n
+        col (range 2 n)
+        div (first (filter #(= (rem num %1) 0) col))]
+    (if
+        (nil? div)
+      num
+      (recur (/ num div)))))
+
+
+
+
+
