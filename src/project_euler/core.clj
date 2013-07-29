@@ -1,4 +1,5 @@
 (ns project-euler.core
+  (:require clojure.stacktrace)
   (:use [clojure.test :as t :only [deftest with-test testing is run-tests run-all-tests]])
   (:gen-class))
 
@@ -98,6 +99,75 @@
         (nil? div)
       num
       (recur (/ num div)))))
+
+
+
+
+;;PROBLEM #4 - Largest Palindrome Product
+;; csl version
+
+(defn palindrome?
+  [n]
+  (= (seq (str n)) (reverse (seq (str n)))))
+
+(defn exp 
+  [n e]
+  (reduce * (repeat e n)))
+
+(defn first-filter
+  [f c]
+  (first (filter f c)))
+
+(defn max-digits 
+  [x]
+  (- (exp 10 x) 1))
+
+(defn seq-repeat-each-item
+  "takes a coll and returns a seq of each item repeated n times"
+  [c coll n]
+  (let [c c
+        coll coll
+        n n]
+    (if
+        (empty? coll)
+      (flatten c)
+      (recur (lazy-seq (cons c (repeat n (first coll))))
+             (rest coll)
+             n))))
+
+(defn seq-repeat
+  "takes a coll and returns a seq repeated n times"
+  [c coll n]
+  (flatten (lazy-seq (cons c (repeat n coll)))))
+
+(defn product-set [x y]
+  (map * x y))
+
+
+(def misc1 (range (max-digits 3) 0 -1))
+
+
+(defn euler-4
+  [x y]
+  (let [x-seq (range (max-digits x) 0 -1)
+        y-seq (range (max-digits y) 0 -1)
+        cnt (max (count x-seq) (count y-seq))
+        set (sort > (product-set (seq-repeat () x-seq cnt) (seq-repeat-each-item () y-seq cnt)))]
+   ;; (println set)
+    (first-filter palindrome? set)))
+
+
+
+;; attempt #2; 1st attempt failed due to stackoverflowerrors
+
+(defn max-product-digits [x y]
+  (* (max-digits x) (max-digits y)))
+
+(defn factor? [n d]
+  (zero? (mod n d)))
+
+(defn palindromes [x]
+  (filter palindrome? (range x 1 -1)))
 
 
 
