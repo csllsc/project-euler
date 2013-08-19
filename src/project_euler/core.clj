@@ -152,6 +152,9 @@
 (def misc1 (range (max-digits 3) 0 -1))
 
 
+;;PROBLEM #5 (woops skipped over this, will do this one next)
+
+
 
 ;;PROBLEM #6 - Sum Square Difference
 ;; csl version
@@ -167,32 +170,5 @@
   (let [r (range 1 (+ x 1))]
     (- (square-sums r) (sum-squares r))))
 
-;;; clwk attempt, using csl exp and palindrome?
-
-(defn exp
-  ([base exponent] (exp base exponent 1))
-  ([base exponent acc]
-     (if (= exponent 0)
-       acc
-       (recur base (- exponent 1) (* acc base)))))
-
-(defn n-digit-numbers [n]
-  (range (exp 10 (- n 1)) (exp 10 n)))
-
-(defn n-digit-products [n]
-  (for [a (n-digit-numbers n)
-        b (n-digit-numbers n)]
-    (* a b)))
-
-(defn n-digit-product-palindromes [n]
-  (filter palindrome? (n-digit-products n)))
-
-(defn max-n-digit-product-palindrome [n]
-  (last (sort (n-digit-product-palindromes n))))
-
-(defn euler4 []
-  (max-n-digit-product-palindrome 3))
-
-;; -> 906609
 
 
