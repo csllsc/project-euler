@@ -152,12 +152,12 @@
 (def misc1 (range (max-digits 3) 0 -1))
 
 
-;;PROBLEM #5 (woops skipped over this, will do this one next)
+;;PROBLEM #5 (woops skipped over this, will do this one next.)
 
 
 
 ;;PROBLEM #6 - Sum Square Difference
-;; csl version
+;; csl version 08/18/13
 
 (defn sum-squares [s]
   (reduce + (map #(* % %) s)))
@@ -169,6 +169,7 @@
 (defn pe6 [x]
   (let [r (range 1 (+ x 1))]
     (- (square-sums r) (sum-squares r))))
+
 
 
 
