@@ -122,6 +122,20 @@
   [x]
   (- (exp 10 x) 1))
 
+(defn product-set [x y]
+  (for [a (range (max-digits x) 0 -1)
+        b (range (max-digits y) 0 -1)]
+    (* a b)))
+
+(defn euler-4 [x y]
+  (first-filter palindrome? (sort > (product-set x y))))
+
+;; not used
+(defn seq-repeat
+  "takes a coll and returns a seq repeated n times"
+  [c coll n]
+  (flatten (lazy-seq (cons c (repeat n coll)))))
+
 (defn seq-repeat-each-item
   "takes a coll and returns a seq of each item repeated n times"
   [c coll n]
@@ -135,41 +149,23 @@
              (rest coll)
              n))))
 
-(defn seq-repeat
-  "takes a coll and returns a seq repeated n times"
-  [c coll n]
-  (flatten (lazy-seq (cons c (repeat n coll)))))
-
-(defn product-set [x y]
-  (map * x y))
-
-
 (def misc1 (range (max-digits 3) 0 -1))
 
 
-(defn euler-4
-  [x y]
-  (let [x-seq (range (max-digits x) 0 -1)
-        y-seq (range (max-digits y) 0 -1)
-        cnt (max (count x-seq) (count y-seq))
-        set (sort > (product-set (seq-repeat () x-seq cnt) (seq-repeat-each-item () y-seq cnt)))]
-   ;; (println set)
-    (first-filter palindrome? set)))
 
+;;PROBLEM #6 - Sum Square Difference
+;; csl version
 
+(defn sum-squares [s]
+  (reduce + (map #(* % %) s)))
 
-;; attempt #2; 1st attempt failed due to stackoverflowerrors
+(defn square-sums [s]
+  (let [x (reduce + s)]
+    (* x x)))
 
-(defn max-product-digits [x y]
-  (* (max-digits x) (max-digits y)))
-
-(defn factor? [n d]
-  (zero? (mod n d)))
-
-(defn palindromes [x]
-  (filter palindrome? (range x 1 -1)))
-
-
+(defn pe6 [x]
+  (let [r (range 1 (+ x 1))]
+    (- (square-sums r) (sum-squares r))))
 
 
 
